@@ -17,18 +17,18 @@ into the web form via JavaScript.
 <table>
   <tr>
     <td width="50%"><img src="media/screenshot1.jpg" alt="Main window" width="100%"></td>
-    <td width="50%"><img src="media/screenshot2.jpg" alt="Excel column picker dialog" width="100%"></td>
+    <td width="50%"><img src="media/screenshot2.jpg" alt="Open txt/xls/xlsx file" width="100%"></td>
   </tr>
   <tr>
     <td align="center"><em>Main window</em></td>
-    <td align="center"><em>Excel column picker dialog</em></td>
+    <td align="center"><em>Open txt / xls / xlsx file</em></td>
   </tr>
   <tr>
-    <td width="50%"><img src="media/screenshot3.jpg" alt="Grade entry page" width="100%"></td>
+    <td width="50%"><img src="media/screenshot3.jpg" alt="Excel column picker dialog" width="100%"></td>
     <td width="50%"><img src="media/screenshot4.jpg" alt="Auto-filled scores" width="100%"></td>
   </tr>
   <tr>
-    <td align="center"><em>Grade entry page</em></td>
+    <td align="center"><em>Excel column picker dialog</em></td>
     <td align="center"><em>Scores auto-filled</em></td>
   </tr>
 </table>
@@ -39,7 +39,7 @@ into the web form via JavaScript.
 
 ### Features
 
-- **Embedded browser** pointed at the JIT (URL configurable via `config.json`), please customize according to your needs.
+- **Embedded browser** — defaults to the unified authentication page of **Jinling Institute of Technology (金陵科技学院)**. The URL shown in the address bar is stored in `config.json` as `base_url`. **Change it to your own school's 正方教务系统 grade-entry page** before using.
 - **Address bar + Go button** — edit the URL and hit *Go* (or press `Enter`).
   The new address is written to `config.json` immediately, so the next launch
   opens the same page. Effectively a one-slot "history".

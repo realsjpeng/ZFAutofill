@@ -6,6 +6,9 @@ on:
       - "v*"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build (${{ matrix.os }})
@@ -17,12 +20,15 @@ jobs:
           - os: windows-latest
             artifact: ZFAutofill-windows.exe
             binary: ZFAutofill.exe
+            sep: ";"
           - os: macos-latest
             artifact: ZFAutofill-macos
             binary: ZFAutofill
+            sep: ":"
           - os: ubuntu-22.04
             artifact: ZFAutofill-linux
             binary: ZFAutofill
+            sep: ":"
             system_deps: |
               sudo apt-get update
               sudo apt-get install -y \
@@ -58,7 +64,7 @@ jobs:
       - name: Build with PyInstaller
         run: |
           pyinstaller --noconfirm --clean --onefile --windowed --name ZFAutofill \
-            --add-data "config.json:." \
+            --add-data "config.json${{ matrix.sep }}." \
             --collect-all PyQt5 \
             --collect-all PyQtWebEngine \
             --hidden-import gui \
@@ -79,10 +85,21 @@ jobs:
           name: ${{ matrix.artifact }}
           path: dist/${{ matrix.artifact }}
 
-      - name: Attach to GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
+  release:
+    name: Create Release & Upload Assets
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/${{ matrix.artifact }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: artifacts/**/*
+          generate_release_notes: true

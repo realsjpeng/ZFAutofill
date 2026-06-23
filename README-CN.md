@@ -21,18 +21,18 @@ JavaScript 将成绩填入网页表单。
 <table>
   <tr>
     <td width="50%"><img src="media/screenshot1.jpg" alt="程序主界面" width="100%"></td>
-    <td width="50%"><img src="media/screenshot2.jpg" alt="Excel列选择对话框" width="100%"></td>
+    <td width="50%"><img src="media/screenshot2.jpg" alt="选取并打开成绩文件" width="100%"></td>
   </tr>
   <tr>
     <td align="center"><em>程序主界面</em></td>
-    <td align="center"><em>Excel 列选择对话框</em></td>
+    <td align="center"><em>选取并打开 txt / xls / xlsx 文件</em></td>
   </tr>
   <tr>
-    <td width="50%"><img src="media/screenshot3.jpg" alt="成绩录入界面" width="100%"></td>
+    <td width="50%"><img src="media/screenshot3.jpg" alt="Excel列选择对话框" width="100%"></td>
     <td width="50%"><img src="media/screenshot4.jpg" alt="自动填入成绩" width="100%"></td>
   </tr>
   <tr>
-    <td align="center"><em>成绩录入界面</em></td>
+    <td align="center"><em>Excel 列选择对话框</em></td>
     <td align="center"><em>自动填入成绩效果</em></td>
   </tr>
 </table>
@@ -43,7 +43,7 @@ JavaScript 将成绩填入网页表单。
 
 ### 功能特性
 
-- **内嵌浏览器**，默认打开金陵科技学院登录页（可在 `config.json` 中配置），请根据自己的需求更改。
+- **内嵌浏览器** — 默认打开的是**金陵科技学院统一身份认证**页面。地址栏的内容会保存到 `config.json` 的 `base_url` 中。**请按自己学校的正方教务系统成绩录入页地址修改**。
 - **地址栏 + 前往按钮** —— 修改地址后按 `Enter` 或点击 *前往*，新地址会
   立即写入 `config.json`，下次启动自动打开。相当于一个轻量的“历史记录”。
 - **左上角「打开」按钮** —— 选择成绩文件：
