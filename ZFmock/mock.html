@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>正方教务管理系统</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: SimSun, "宋体", Arial, sans-serif;
+  font-size: 12px;
+  color: #000;
+  background: #d5e6f3;
+  overflow: hidden;
+}
+
+/* ===== 顶部横幅 ===== */
+.header {
+  height: 72px;
+  background: linear-gradient(180deg, #2f7bbd 0%, #1a5a94 48%, #114073 49%, #0d3560 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 2px solid #0b3058;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+}
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.logo-icon {
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgba(255,255,255,.85);
+  border-radius: 4px;
+  background: rgba(255,255,255,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font: bold 22px "Microsoft YaHei", SimSun, sans-serif;
+}
+.logo-text h1 {
+  color: #fff;
+  font-family: "Microsoft YaHei", SimSun, sans-serif;
+  font-size: 22px;
+  font-weight: normal;
+  letter-spacing: 3px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.4);
+}
+.user-info {
+  color: #d8eaf8;
+  font-size: 12px;
+  line-height: 2;
+  text-align: right;
+}
+.user-info .name {
+  color: #fff;
+  font-size: 13px;
+}
+.user-info a {
+  color: #b8d4ee;
+  text-decoration: none;
+  margin-left: 14px;
+}
+.user-info a:hover { color: #fff; text-decoration: underline; }
+
+/* ===== 导航菜单 ===== */
+.nav-bar {
+  height: 30px;
+  background: linear-gradient(180deg, #e8f2fa 0%, #b8d4ea 100%);
+  border-top: 1px solid #96bdd8;
+  border-bottom: 1px solid #86a8c4;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  position: fixed;
+  top: 72px; left: 0; right: 0;
+  z-index: 9;
+}
+.nav-item {
+  display: inline-block;
+  padding: 0 18px;
+  color: #0b3e6b;
+  text-decoration: none;
+  font-size: 13px;
+  border-right: 1px solid #a0bdd4;
+  line-height: 28px;
+  cursor: pointer;
+}
+.nav-item:last-child { border-right: none; }
+.nav-item:hover {
+  background: #c8ddf0;
+  color: #002855;
+}
+.nav-item .down-arrow::after {
+  content: ' ▼';
+  font-size: 9px;
+}
+
+/* ===== 面包屑 ===== */
+.breadcrumb {
+  height: 28px;
+  background: #eef5fc;
+  border: 1px solid #95bde0;
+  border-bottom: none;
+  line-height: 28px;
+  padding: 0 10px;
+  color: #064478;
+  position: fixed;
+  top: 102px; left: 0; right: 0;
+  z-index: 8;
+}
+
+/* ===== 内容区域 ===== */
+.content-wrap {
+  position: fixed;
+  top: 130px;
+  left: 5px;
+  right: 5px;
+  bottom: 24px;
+  border: 1px solid #8bb4d4;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* ===== iframe ===== */
+.iframe-box {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ===== 页脚 ===== */
+.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 22px;
+  background: #e4edf5;
+  border-top: 1px solid #c0d4e6;
+  line-height: 22px;
+  text-align: center;
+  color: #668aa8;
+  font-size: 11px;
+}
+.footer a { color: #4a7aaa; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ===== iframe内部样式 ===== */
+.form-body {
+  font-family: SimSun, "宋体", Arial, sans-serif;
+  font-size: 12px;
+  color: #000;
+  background: #fff;
+  padding: 6px;
+}
+.form-title {
+  background: linear-gradient(180deg, #f0f6fb, #d3e4f3);
+  border: 1px solid #8eb6d6;
+  color: #064478;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 5px 10px;
+  margin-bottom: 6px;
+}
+.form-header {
+  border: 1px solid #8eb6d6;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+  width: 100%;
+}
+.form-header td {
+  border: 1px solid #8eb6d6;
+  padding: 5px 8px;
+  text-align: left;
+  font-size: 12px;
+}
+.form-header .label-td {
+  width: 90px;
+  background: #e8f1fa;
+  color: #064478;
+  text-align: right;
+  font-weight: bold;
+}
+.form-controls {
+  padding: 6px 8px;
+  background: #f5faff;
+  border: 1px solid #8eb6d6;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.form-controls label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.data-grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-grid th {
+  background: linear-gradient(180deg, #f0f7fc, #d0e3f2);
+  border: 1px solid #8eb6d6;
+  padding: 4px 6px;
+  font-weight: normal;
+  color: #064478;
+  text-align: center;
+  font-size: 12px;
+}
+.data-grid td {
+  border: 1px solid #8eb6d6;
+  padding: 3px 6px;
+  text-align: center;
+  font-size: 12px;
+}
+.data-grid tbody tr:nth-child(even) {
+  background: #f5f9fd;
+}
+.data-grid td.name-td {
+  text-align: left;
+  padding-left: 8px;
+}
+.data-grid input[type="text"] {
+  width: 64px;
+  height: 20px;
+  border: 1px solid #7a9ab5;
+  text-align: center;
+  font-size: 12px;
+  font-family: SimSun, "宋体", sans-serif;
+}
+.data-grid input[type="text"]:focus {
+  border-color: #2b6cb8;
+  outline: none;
+}
+.btn-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.btn-row button {
+  min-width: 72px;
+  height: 24px;
+  padding: 0 16px;
+  border: 1px solid #7aa3c2;
+  background: linear-gradient(180deg, #ffffff, #d8e8f4);
+  color: #064478;
+  font-size: 12px;
+  font-family: SimSun, "宋体", sans-serif;
+  cursor: pointer;
+}
+.btn-row button:hover {
+  background: linear-gradient(180deg, #ffffff, #c8ddf0);
+}
+.form-note {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部横幅 -->
+<div class="header">
+  <div class="logo-area">
+    <div class="logo-icon">方</div>
+    <div class="logo-text">
+      <h1>正方教务管理系统</h1>
+    </div>
+  </div>
+  <div class="user-info">
+    <span>欢迎</span>
+    <span class="name">[演示教师]</span>&nbsp;&nbsp;
+    <a href="#">退出</a>&nbsp;&nbsp;
+    <a href="#">帮助</a>&nbsp;&nbsp;
+    <a href="#">修改密码</a>
+  </div>
+</div>
+
+<!-- 导航菜单 -->
+<div class="nav-bar">
+  <a class="nav-item" href="#">首页</a>
+  <a class="nav-item down-arrow" href="#">成绩录入</a>
+  <a class="nav-item down-arrow" href="#">信息维护</a>
+  <a class="nav-item down-arrow" href="#">信息查询</a>
+  <a class="nav-item" href="#">教学评价</a>
+  <a class="nav-item" href="#">系统管理</a>
+</div>
+
+<!-- 面包屑 -->
+<div class="breadcrumb">当前位置：首页 &gt; 成绩录入</div>
+
+<!-- 内容区域 -->
+<div class="content-wrap">
+  <iframe class="iframe-box" name="zhuti"></iframe>
+</div>
+
+<!-- 页脚 -->
+<div class="footer">
+  &copy;1999-2017 <a href="#">正方软件股份有限公司</a>
+  <span>版权所有</span>
+</div>
+
+<script>
+(function() {
+  var iframe = document.querySelector('iframe[name="zhuti"]');
+  var doc = iframe.contentDocument || iframe.contentWindow.document;
+  doc.open();
+  doc.write('\
+<div class="form-body">\
+<div class="form-title">学生成绩录入</div>\
+<table class="form-header">\
+<tr>\
+  <td class="label-td">学年学期：</td><td>2024-2025学年第2学期</td>\
+  <td class="label-td">课程名称：</td><td>数据结构</td>\
+</tr>\
+<tr>\
+  <td class="label-td">课程代码：</td><td>CS2103B</td>\
+  <td class="label-td">教学班：</td><td>2024计科(1)班</td>\
+</tr>\
+<tr>\
+  <td class="label-td">任课教师：</td><td>演示教师</td>\
+  <td class="label-td">学生人数：</td><td>20</td>\
+</tr>\
+</table>\
+<div class="form-controls">\
+  <label><input type="radio" name="mode" id="rad_4" checked> 录入模式</label>\
+  <label><input type="radio" name="mode" disabled> 只读模式</label>\
+  <span style="color:#666;">请选择成绩项后录入，保存前请核对数据。</span>\
+</div>\
+<table class="data-grid">\
+<thead>\
+<tr>\
+  <th style="width:44px;">序号</th>\
+  <th style="width:120px;">学号</th>\
+  <th style="width:90px;">姓名</th>\
+  <th style="width:110px;">平时成绩</th>\
+  <th style="width:110px;">期末成绩</th>\
+</tr>\
+</thead>\
+<tbody>\
+<tr><td>1</td><td>2024138101</td><td class="name-td">张伟</td><td><input type="text" name="DataGrid1:_ctl2:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl2:qm" value=""></td></tr>\
+<tr><td>2</td><td>2024138102</td><td class="name-td">王芳</td><td><input type="text" name="DataGrid1:_ctl3:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl3:qm" value=""></td></tr>\
+<tr><td>3</td><td>2024138103</td><td class="name-td">李娜</td><td><input type="text" name="DataGrid1:_ctl4:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl4:qm" value=""></td></tr>\
+<tr><td>4</td><td>2024138104</td><td class="name-td">刘洋</td><td><input type="text" name="DataGrid1:_ctl5:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl5:qm" value=""></td></tr>\
+<tr><td>5</td><td>2024138105</td><td class="name-td">陈静</td><td><input type="text" name="DataGrid1:_ctl6:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl6:qm" value=""></td></tr>\
+<tr><td>6</td><td>2024138106</td><td class="name-td">杨帆</td><td><input type="text" name="DataGrid1:_ctl7:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl7:qm" value=""></td></tr>\
+<tr><td>7</td><td>2024138107</td><td class="name-td">赵磊</td><td><input type="text" name="DataGrid1:_ctl8:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl8:qm" value=""></td></tr>\
+<tr><td>8</td><td>2024138108</td><td class="name-td">黄丽</td><td><input type="text" name="DataGrid1:_ctl9:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl9:qm" value=""></td></tr>\
+<tr><td>9</td><td>2024138109</td><td class="name-td">周杰</td><td><input type="text" name="DataGrid1:_ctl10:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl10:qm" value=""></td></tr>\
+<tr><td>10</td><td>2024138110</td><td class="name-td">吴敏</td><td><input type="text" name="DataGrid1:_ctl11:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl11:qm" value=""></td></tr>\
+<tr><td>11</td><td>2024138111</td><td class="name-td">徐婷</td><td><input type="text" name="DataGrid1:_ctl12:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl12:qm" value=""></td></tr>\
+<tr><td>12</td><td>2024138112</td><td class="name-td">孙浩</td><td><input type="text" name="DataGrid1:_ctl13:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl13:qm" value=""></td></tr>\
+<tr><td>13</td><td>2024138113</td><td class="name-td">马超</td><td><input type="text" name="DataGrid1:_ctl14:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl14:qm" value=""></td></tr>\
+<tr><td>14</td><td>2024138114</td><td class="name-td">朱琳</td><td><input type="text" name="DataGrid1:_ctl15:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl15:qm" value=""></td></tr>\
+<tr><td>15</td><td>2024138115</td><td class="name-td">胡涛</td><td><input type="text" name="DataGrid1:_ctl16:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl16:qm" value=""></td></tr>\
+<tr><td>16</td><td>2024138116</td><td class="name-td">郭雪</td><td><input type="text" name="DataGrid1:_ctl17:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl17:qm" value=""></td></tr>\
+<tr><td>17</td><td>2024138117</td><td class="name-td">林峰</td><td><input type="text" name="DataGrid1:_ctl18:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl18:qm" value=""></td></tr>\
+<tr><td>18</td><td>2024138118</td><td class="name-td">何倩</td><td><input type="text" name="DataGrid1:_ctl19:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl19:qm" value=""></td></tr>\
+<tr><td>19</td><td>2024138119</td><td class="name-td">高翔</td><td><input type="text" name="DataGrid1:_ctl20:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl20:qm" value=""></td></tr>\
+<tr><td>20</td><td>2024138120</td><td class="name-td">罗琴</td><td><input type="text" name="DataGrid1:_ctl21:ps" value=""></td><td><input type="text" name="DataGrid1:_ctl21:qm" value=""></td></tr>\
+</tbody>\
+</table>\
+<div class="btn-row">\
+  <button name="保 存">保 存</button>\
+  <button>重 置</button>\
+</div>\
+<div class="form-note">\
+  演示页面 - 所有学生姓名、学号均为虚构，不涉及真实个人数据\
+</div>\
+</div>\
+');
+  doc.close();
+})();
+</script>
+</body>
+</html>
