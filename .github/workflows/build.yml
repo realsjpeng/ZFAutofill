@@ -62,6 +62,7 @@ jobs:
           pip install pyinstaller
 
       - name: Build with PyInstaller
+        shell: bash
         run: |
           pyinstaller --noconfirm --clean --onefile --windowed --name ZFAutofill \
             --add-data "config.json${{ matrix.sep }}." \
