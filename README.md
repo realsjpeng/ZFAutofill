@@ -34,7 +34,7 @@ into the web form via JavaScript.
 ---
 
 <video controls width="100%">
-  <source src="media/demo.mp4" type="video/mp4">
+  <source src="https://raw.githubusercontent.com/realsjpeng/ZFAutofill/refs/heads/main/media/demo.mp4" type="video/mp4">
 </video>
 
 *Demo recording using the local demo site — shows navigating to the mock page, selecting an `.xlsx` file, and auto-filling scores into the form. · BGM: "Technology" by The_Mountain — Pixabay*
