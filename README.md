@@ -1,7 +1,5 @@
 # ZFAutofill
 
-> [English](#english) | [中文](README-CN.md)
-
 A small desktop tool that automates score entry on the **正方教务系统**
 (Zhengfang Educational Administration System) and other systems that use the
 same DOM structure. It embeds the grade-entry page in a Qt WebEngine view,
@@ -35,9 +33,15 @@ into the web form via JavaScript.
 
 ---
 
-## English
+<video controls width="100%">
+  <source src="media/demo.mp4" type="video/mp4">
+</video>
 
-### Features
+*Demo recording using the local demo site — shows navigating to the mock page, selecting an `.xlsx` file, and auto-filling scores into the form. · BGM: "Technology" by The_Mountain — Pixabay*
+
+---
+
+## Features
 
 - **Embedded browser** — defaults to the unified authentication page of **Jinling Institute of Technology (金陵科技学院)**. The URL shown in the address bar is stored in `config.json` as `base_url`. **Change it to your own school's 正方教务系统 grade-entry page** before using.
 - **Address bar + Go button** — edit the URL and hit *Go* (or press `Enter`).
@@ -52,7 +56,7 @@ into the web form via JavaScript.
 - **Auto-fill scores** — reads regular scores and final scores from a local file and injects them into the web form automatically.
 - **i18n** — UI strings follow the system locale (English / 简体中文).
 
-### Run from source
+## Run from source
 
 1. Install Python 3.9 or newer.
 2. Install the dependencies:
@@ -65,7 +69,7 @@ into the web form via JavaScript.
    ```
 4. Log in inside the embedded browser.
 
-### Usage
+## Usage
 
 1. **Log in** to the Zhengfang Educational Administration System in the embedded browser.
 2. **Navigate** to the grade-entry page — you should see the score table with regular score / final score columns.
@@ -73,7 +77,7 @@ into the web form via JavaScript.
 4. **Click the Run button** at the **bottom-right corner** to start autofill.
 5. The program reads the file and fills the web form automatically.
 
-### Input file format
+## Input file format
 
 **TXT** — one student per line, two whitespace-separated columns
 (regular score, then final score):
@@ -95,7 +99,18 @@ preview, then you pick:
 The dialog remembers the previous selection, so re-running with the same file
 is a single click.
 
-### Configuration
+## Build executable
+
+You can compile the project into a standalone executable with the built-in build script:
+
+```bash
+python build.py          # single-file executable
+python build.py --dir    # directory output (faster build)
+```
+
+The output goes to `dist/`. Requires Python 3.9+ and PyInstaller (auto-installed if missing).
+
+## Configuration
 
 `config.json` lives next to the script and is created/updated automatically.
 Fields:
@@ -111,7 +126,20 @@ Fields:
 
 Missing keys fall back to sensible defaults, so older configs keep working.
 
-### Adapting to other systems
+## Local demo site (ZFmock)
+
+The `ZFmock/` folder provides everything you need to try the tool without connecting to a real school system:
+
+| File | Purpose |
+|---|---|
+| `mock.html` | A local web page that mimics the Zhengfang grade-entry interface. Open it in the address bar via `file:///path/to/ZFmock/mock.html` (replace with the actual path on your machine). |
+| `example.txt` | Sample input file (plain text, two columns). |
+| `example.xls` | Same data in old Excel format. |
+| `example.xlsx` | Same data in new Excel format. |
+
+Load one of the example files with the **Open** button, then click **Run** to see the scores filled into the mock page.
+
+## Adapting to other systems
 
 This tool was written for 正方教务系统, but the script in
 `run_input_scores` is short and easy to tweak. To target a different DOM:
@@ -123,7 +151,7 @@ This tool was written for 正方教务系统, but the script in
 The rest of the app (file loading, address bar, i18n, build pipeline) stays
 as-is.
 
-### Troubleshooting
+## Troubleshooting
 
 - *"Missing dependency 'openpyxl' / 'xlrd'"* — install them with
   `pip install openpyxl xlrd` (already listed in `requirements.txt`).
@@ -133,7 +161,7 @@ as-is.
   actual score-entry screen and that the page exposes
   `iframe[name="zhuti"]`.
 
-### License
+## License
 
 GNU GENERAL PUBLIC LICENSE v3.0
 

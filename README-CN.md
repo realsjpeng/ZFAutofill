@@ -1,7 +1,5 @@
 # ZFAutofill
 
-> [English](#english) | [中文](#中文)
-
 A small desktop tool that automates score entry on the **正方教务系统**
 (Zhengfang Educational Administration System) and other systems that use the
 same DOM structure. It embeds the grade-entry page in a Qt WebEngine view,
@@ -39,9 +37,15 @@ JavaScript 将成绩填入网页表单。
 
 ---
 
-## 中文
+<video controls width="100%">
+  <source src="media/demo.mp4" type="video/mp4">
+</video>
 
-### 功能特性
+*演示录屏使用本地演示网站 — 展示了从打开 mock 页面、选取 xlsx 文件，到最后自动填入成绩的完整流程。 · 背景音乐："Technology" by The_Mountain — Pixabay*
+
+---
+
+## 功能特性
 
 - **内嵌浏览器** — 默认打开的是**金陵科技学院统一身份认证**页面。地址栏的内容会保存到 `config.json` 的 `base_url` 中。**请按自己学校的正方教务系统成绩录入页地址修改**。
 - **地址栏 + 前往按钮** —— 修改地址后按 `Enter` 或点击 *前往*，新地址会
@@ -55,7 +59,7 @@ JavaScript 将成绩填入网页表单。
 - **自动填写成绩** —— 读取本地文件中的平时成绩和期末成绩，自动填入网页表单。
 - **国际化** —— 界面文字跟随系统语言（English / 简体中文）。
 
-### 从源码运行
+## 从源码运行
 
 1. 安装 Python 3.9 或更高版本。
 2. 安装依赖：
@@ -67,7 +71,7 @@ JavaScript 将成绩填入网页表单。
    python main.py
    ```
 
-### 使用步骤
+## 使用步骤
 
 1. **登录**方正教务系统（在内嵌浏览器中完成）。
 2. **进入成绩录入页面**——应能看到平时成绩/期末成绩的表格。
@@ -75,7 +79,7 @@ JavaScript 将成绩填入网页表单。
 4. **启动**：点击右下角的 **运行** 按钮。
 5. 程序会根据文件内容自动填写表格。
 
-### 输入文件格式
+## 输入文件格式
 
 **TXT** —— 每行一名学生，两列以任意空白分隔（平时成绩，期末成绩）：
 
@@ -94,7 +98,18 @@ JavaScript 将成绩填入网页表单。
 
 对话框会记住上一次的设置，因此同一个文件再次运行只需点一次「打开」→「确定」。
 
-### 配置说明
+## 构建可执行文件
+
+使用项目自带的 `build.py` 可将项目打包为独立可执行文件：
+
+```bash
+python build.py          # 单文件模式（默认）
+python build.py --dir    # 目录模式（编译更快）
+```
+
+输出在 `dist/` 目录下。需要 Python 3.9+ 和 PyInstaller（脚本会自动安装）。
+
+## 配置说明
 
 `config.json` 位于脚本同目录，会自动创建与更新。字段含义：
 
@@ -109,7 +124,20 @@ JavaScript 将成绩填入网页表单。
 
 缺失的字段会使用默认值，旧的配置文件不会出错。
 
-### 适配其它教务系统
+## 本地演示网站 (ZFmock)
+
+`ZFmock/` 目录包含无需连接真实教务系统即可试用的全部文件：
+
+| 文件 | 用途 |
+|---|---|
+| `mock.html` | 模拟正方成绩录入界面的本地网页。在地址栏输入 `file:///path/to/ZFmock/mock.html` 即可打开（请替换为实际路径）。 |
+| `example.txt` | 示例输入文件（纯文本，两列）。 |
+| `example.xls` | 相同数据的旧版 Excel 格式。 |
+| `example.xlsx` | 相同数据的新版 Excel 格式。 |
+
+用 **打开** 按钮加载任一示例文件，再点击 **运行** 即可看到成绩自动填入演示页面。
+
+## 适配其它教务系统
 
 本工具默认针对 **正方教务系统**（其成绩录入页统一在
 `iframe[name="zhuti"]` 中，输入框命名为
@@ -122,7 +150,7 @@ JavaScript 将成绩填入网页表单。
 
 其余的地址栏、文件加载、i18n、构建流水线全部保持不变。
 
-### 常见问题
+## 常见问题
 
 - *提示缺少依赖 `openpyxl` / `xlrd`* —— 执行
   `pip install openpyxl xlrd`（已在 `requirements.txt` 中）。
@@ -130,7 +158,7 @@ JavaScript 将成绩填入网页表单。
 - *点击「运行」没反应* —— 请确认页面已经进入成绩录入界面，并且页面中存在
   `iframe[name="zhuti"]`。
 
-### 协议
+## 协议
 
 GNU GENERAL PUBLIC LICENSE v3.0
 
