@@ -1,5 +1,7 @@
 # ZFAutofill
 
+> [English](#features) | [中文](README-CN.md)
+
 A small desktop tool that automates score entry on the **正方教务系统**
 (Zhengfang Educational Administration System) and other systems that use the
 same DOM structure. It embeds the grade-entry page in a Qt WebEngine view,
@@ -33,11 +35,9 @@ into the web form via JavaScript.
 
 ---
 
-<video controls width="100%">
-  <source src="https://raw.githubusercontent.com/realsjpeng/ZFAutofill/refs/heads/main/media/demo.mp4" type="video/mp4">
-</video>
+[![Demo video](media/screenshot1.jpg)](https://raw.githubusercontent.com/realsjpeng/ZFAutofill/main/media/demo.mp4)
 
-*Demo recording using the local demo site — shows navigating to the mock page, selecting an `.xlsx` file, and auto-filling scores into the form. · BGM: "Technology" by The_Mountain — Pixabay*
+*Click the screenshot to watch the demo recording — shows navigating to the mock page, selecting an `.xlsx` file, and auto-filling scores into the form. · BGM: "Technology" by The_Mountain — Pixabay*
 
 ---
 

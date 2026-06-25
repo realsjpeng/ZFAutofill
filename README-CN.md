@@ -37,11 +37,9 @@ JavaScript 将成绩填入网页表单。
 
 ---
 
-<video controls width="100%">
-  <source src="https://raw.githubusercontent.com/realsjpeng/ZFAutofill/refs/heads/main/media/demo.mp4" type="video/mp4">
-</video>
+[![演示视频](media/screenshot1.jpg)](https://raw.githubusercontent.com/realsjpeng/ZFAutofill/main/media/demo.mp4)
 
-*演示录屏使用本地演示网站 — 展示了从打开 mock 页面、选取 xlsx 文件，到最后自动填入成绩的完整流程。 · 背景音乐："Technology" by The_Mountain — Pixabay*
+*点击截图观看演示录屏 — 展示了从打开 mock 页面、选取 xlsx 文件，到最后自动填入成绩的完整流程。 · 背景音乐："Technology" by The_Mountain — Pixabay*
 
 ---
 
